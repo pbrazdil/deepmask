@@ -19,12 +19,17 @@ for dataType in ["train2014", "val2014"]:
     newAnnots = []
     newImgIds = []
     newImg = []
+    newCats = []
     with open(annotationFile) as data_file:    
         data = json.load(data_file)
         print("Loaded", dataType)
 
+    for category in data["categories"]:
+        if category["id"] == category_id:
+            newCats.append(category)
+
     for annotation in data["annotations"]:
-        if annotation["category_id"] == 13:
+        if annotation["category_id"] == category_id:
             newAnnots.append(annotation)
             newImgIds.append(annotation["image_id"])
 
@@ -34,6 +39,7 @@ for dataType in ["train2014", "val2014"]:
 
     data["images"] = newImg
     data["annotations"] = newAnnots
+    data["categories"] = newCats
     print("Processed")
 
     os.rename(annotationFile, annotationFileBackup)

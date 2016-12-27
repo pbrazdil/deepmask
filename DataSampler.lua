@@ -132,6 +132,8 @@ function DataSampler:maskSampling()
   local cat,ann = torch.random(80)
   while not ann or ann.iscrowd == 1 or ann.area < 100 or ann.bbox[3] < 5
     or ann.bbox[4] < 5 do
+      print(111)
+      print(cat)
       local catId = self.catIds[cat]
       local annIds = self.coco:getAnnIds({catId=catId})
       local annid = annIds[torch.random(annIds:size(1))]
