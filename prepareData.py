@@ -5,7 +5,7 @@ import os.path
 import sys
 
 if len(sys.argv) <= 1:
-  print("Data Type argument needs to be given.")
+  print("Data Type argument needs to be `val2014` or `train2014`.")
   sys.exit(1)
 
 dataDir = './data'
@@ -20,6 +20,7 @@ annotationFile = '%s/annotations/instances_%s.json' % (dataDir, dataType)
 coco = COCO(annotationFile)
 catIds = coco.getCatIds(catNms=['stop sign']);
 imgIds = coco.getImgIds(catIds=catIds);
+
 i = 1
 for val in imgIds:
   print("%d / %d" % (i, len(imgIds)))
